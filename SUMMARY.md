@@ -6,6 +6,8 @@
   * [第2章 简介](di-yi-bu-fen-ru-men/di-2-zhang-jian-jie.md)
   * [第3章 Spring Security 5新功能](di-3-zhang-spring-security-5-xin-gong-neng.md)
   * [第4章 示例应用](di-4-zhang-shi-li-ying-yong.md)
+  * [第5章 Java代码配置](chapter-5-java-configuration.md)
+    * [Chapter 5.1 Hello Web Security Java Configuration](chapter-51-hello-web-security-java-configuration.md)
 * [第二部分 架构与实现](di-er-bu-fen-jia-gou-yu-shi-xian.md)
 * 第2章 简介
 * [第三部分 测试](di-san-bu-fen-ce-shi.md)
@@ -13,4 +15,6 @@
 * 第五部分 认证
 * 第六部分 高级主题
 * 第七部分 Spring Date 集成
+
+
 

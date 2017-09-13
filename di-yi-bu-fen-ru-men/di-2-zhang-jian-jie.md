@@ -138,15 +138,15 @@ Spring Security针对Spring Framework 5.0.0.RC3构建，但应该与4.0.x一起�
 
 ```
 <dependencyManager> 
-	<dependencies> 
-	<dependency> 
-		<groupId> org.springframework </ groupId> 
-		<artifactId> spring-framework-bom </ artifactId> 
-		<version> 5.0.0.RC3 </ version> 
-		<type> pom </ type > 
-		<scope> import </ scope> 
-	</ dependency> 
-	</ dependencies> 
+    <dependencies> 
+    <dependency> 
+        <groupId> org.springframework </ groupId> 
+        <artifactId> spring-framework-bom </ artifactId> 
+        <version> 5.0.0.RC3 </ version> 
+        <type> pom </ type > 
+        <scope> import </ scope> 
+    </ dependency> 
+    </ dependencies> 
 </ dependencyManagement>
 ```
 
@@ -163,30 +163,23 @@ Spring Security针对Spring Framework 5.0.0.RC3构建，但应该与4.0.x一起�
 **的build.gradle。 **
 
 ```
-依赖{
-
-    编译
-'org.springframework.security:spring-security-web:5.0.0.M3'
-
-    编译
-'org.springframework.security:spring-security-config:5.0.0.M3'
-
+dependencies {
+compile 'org.springframework.security:spring-security-web:5.0.0.M3'
+compile 'org.springframework.security:spring-security-config:5.0.0.M3'
 }
 ```
 
-如果您正在使用其他功能（如LDAP，OpenID等），则还需要包含相应的[第2.4.3节“项目模块”](https://docs.spring.io/spring-security/site/docs/5.0.0.M3/reference/htmlsingle/#modules)。
+如果您正在使用其他功能（如LDAP，OpenID等），则还需要包含相应项目模块。
 
-#### 毕业资料库
+#### Gradle 仓库
 
 所有GA版本（即以.RELEASE结尾的版本）都部署到Maven Central，因此使用mavenCentral（）存储库对于GA版本是足够的。
 
 **的build.gradle。 **
 
 ```
-存储库{
-
-    mavenCentral（）
-
+repositories {
+    mavenCentral()
 }
 ```
 
@@ -195,12 +188,8 @@ Spring Security针对Spring Framework 5.0.0.RC3构建，但应该与4.0.x一起�
 **的build.gradle。 **
 
 ```
-存储库{
-
-    maven {url'https 
-://repo.spring.io/snapshot'
- }
-
+repositories {
+    maven { url 'https://repo.spring.io/snapshot' }
 }
 ```
 
@@ -209,12 +198,8 @@ Spring Security针对Spring Framework 5.0.0.RC3构建，但应该与4.0.x一起�
 **的build.gradle。 **
 
 ```
-存储库{
-
-    maven {url'https 
-://repo.spring.io/milestone'
- }
-
+repositories {
+    maven { url 'https://repo.spring.io/milestone' }
 }
 ```
 
@@ -225,22 +210,12 @@ Spring Security针对Spring Framework 5.0.0.RC3构建，但应该与4.0.x一起�
 **的build.gradle。 **
 
 ```
-configured.all {
-
-    resolutionStrategy.eachDependency {DependencyResolveDetails details  - 
->
-if
-（details.requested.group == 
-'org.springframework'
-）{
-
-            details.useVersion'5.0.0.RC3 
-'
-
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'org.springframework') {
+            details.useVersion '5.0.0.RC3'
         }
-
     }
-
 }
 ```
 
@@ -295,7 +270,7 @@ OpenID Web认证支持。用于对外部OpenID服务器进行身份验证。`org
 
 支持使用Spring Security进行测试。
 
-### 2.4.4检查源
+### 2.4.4 源代码
 
 由于Spring Security是一个开源项目，我们强烈建议您使用git查看源代码。这将使您可以完全访问所有示例应用程序，您可以轻松地构建项目的最新版本。拥有项目的来源也是调试的巨大帮助。异常堆栈跟踪不再是黑盒子的问题，但您可以直接了解导致问题的线路，并解决发生了什么。来源是项目的最终文档，通常是查找实际工作原理的最简单的地方。
 
