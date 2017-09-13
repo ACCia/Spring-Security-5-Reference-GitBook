@@ -6,7 +6,7 @@ Spring Security为基于Java EE的企业软件应用程序提供了全面的安�
 
 Spring Security专注于帮助您实现企业应用程序安全层，您会发现有与业务问题域有很多不同的要求。银行应用程序具有来自电子商务应用程序的不同需求。电子商务应用程序具有来自企业销售人员自动化工具的不同需求。这些定制要求使应用程序安全性变得有趣，具有挑战性和有价值
 
-请阅读[第1章入门指南](https://docs.spring.io/spring-security/site/docs/5.0.0.M3/reference/htmlsingle/#getting-started)。这将向您介绍框架和基于命名空间的配置系统，您可以使用该配置系统快速启动和运行。为了更好地了解Spring Security如何工作，以及您可能需要使用的一些类，您应该阅读[第二部分“架构与实现”](https://docs.spring.io/spring-security/site/docs/5.0.0.M3/reference/htmlsingle/#overall-architecture)。本指南的其余部分采用更传统的参考风格，旨在根据需要进行阅读。我们还建议您尽可能阅读应用程序安全问题。春天安全并不是一个能解决所有安全问题的灵丹妙药。从一开始，应用程序的设计考虑到安全性是非常重要的。尝试改造它不是一个好主意。特别是，如果您正在构建Web应用程序，您应该了解许多潜在的漏洞，例如跨站点脚本，请求伪造和会话劫持，您应该从头开始考虑。OWASP网站（[http://www.owasp.org/](https://www.owasp.org/)）保留了十大Web应用漏洞列表以及大量有用的参考信息。
+请阅读[第1章入门指南](https://docs.spring.io/spring-security/site/docs/5.0.0.M3/reference/htmlsingle/#getting-started)。这将向您介绍框架和基于命名空间的配置系统，您可以使用该配置系统快速启动和运行。为了更好地了解Spring Security如何工作，以及您可能需要使用的一些类，您应该阅读[第二部分“架构与实现”](https://docs.spring.io/spring-security/site/docs/5.0.0.M3/reference/htmlsingle/#overall-architecture)。本指南的其余部分采用更传统的参考风格，旨在根据需要进行阅读。我们还建议您尽可能阅读应用程序安全问题。SpringSecurity并不是一个能解决所有安全问题的灵丹妙药。从一开始，应用程序的设计考虑到安全性是非常重要的。尝试改造它不是一个好主意。特别是，如果您正在构建Web应用程序，您应该了解许多潜在的漏洞，例如跨站点脚本，请求伪造和会话劫持，您应该从头开始考虑。OWASP网站（[http://www.owasp.org/](https://www.owasp.org/)）保留了十大Web应用漏洞列表以及大量有用的参考信息。
 
 我们希望您发现本参考指南有用，我们欢迎您的反馈和[建议](https://docs.spring.io/spring-security/site/docs/5.0.0.M3/reference/htmlsingle/#jira)。
 
