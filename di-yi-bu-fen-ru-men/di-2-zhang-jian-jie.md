@@ -44,8 +44,6 @@ Spring Security为基于Java EE的企业软件应用程序提供全面的安全�
 
 不管认证机制如何，Spring Security提供了一套深度的授权功能。有三个主要的兴趣领域：授权Web请求，授权是否可以调用方法并授权访问各个域对象实例。为了帮助您了解差异，请分别考虑Servlet规范Web模式安全性，EJB容器管理安全性和文件系统安全性中的授权功能。Spring Security在所有这些重要领域提供了深刻的功能，我们将在本参考指南中进一步探讨。
 
-
-
 ## 2.2历史
 
 Spring Security began in late 2003 as "The Acegi Security System for Spring". A question was posed on the Spring Developers' mailing list asking whether there had been any consideration given to a Spring-based security implementation. At the time the Spring community was relatively small \(especially compared with the size today!\), and indeed Spring itself had only existed as a SourceForge project from early 2003. The response to the question was that it was a worthwhile area, although a lack of time currently prevented its exploration.
@@ -59,8 +57,6 @@ Spring Security began in late 2003 as "The Acegi Security System for Spring". A 
 Acegi Security于2007年底成为官方的Spring Portfolio项目，并被重新命名为“Spring Security”。
 
 今天，Spring Security拥有强大而活跃的开源社区。在支持论坛上有关于Spring Security的成千上万的消息。开发人员的活跃核心是代码本身和一个活跃的社区，这些社区也定期分享补丁并支持同行。
-
-
 
 ## 2.3版本编号
 
@@ -78,77 +74,25 @@ Acegi Security于2007年底成为官方的Spring Portfolio项目，并被重新�
 
 一个最小的Spring Security Maven依赖关系通常如下所示：
 
-**pom.xml中。 **
+**pom.xml中。 **
 
 ```
-<
-依赖关系
->
-<
-！ -  ...其他依赖元素...  - 
->
-<
-dependency
->
-<
-groupId
->
- org.springframework.security 
-<
-/ groupId
->
-<
-artifactId
->
- spring-security-web 
-<
-/ artifactId
->
-<
-version
->
- 5.0 .0.M3 
-<
-/ version
->
-<
-/ dependency
->
-<
-dependency
->
-<
-groupId
->
- org.springframework.security 
-<
-/ groupId
->
-<
-artifactId
->
- spring-security-config 
-<
-/ artifactId
->
-<
-version
->
- 5.0.0.M3 
-<
-/ version 
->
-<
-/ dependency
->
-<
-/ dependencies
->
+<dependencies>
+<!-- ... other dependency elements ... -->
+<dependency>
+<groupId>org.springframework.security</groupId>
+<artifactId>spring-security-web</artifactId>
+<version>5.0.0.M3</version>
+</dependency>
+<dependency>
+<groupId>org.springframework.security</groupId>
+<artifactId>spring-security-config</artifactId>
+<version>5.0.0.M3</version>
+</dependency>
+</dependencies>
 ```
 
-
-
-如果您正在使用其他功能（如LDAP，OpenID等），则还需要包含相应的[第2.4.3节“项目模块”](https://docs.spring.io/spring-security/site/docs/5.0.0.M3/reference/htmlsingle/#modules)。
+如果您正在使用其他功能（如LDAP，OpenID等），则还需要包含相应的项目模块。
 
 #### Maven存储库
 
@@ -156,93 +100,33 @@ version
 
 如果您使用SNAPSHOT版本，则需要确保Spring Snapshot存储库的定义如下所示：
 
-**pom.xml中。 **
+**pom.xml中。 **
 
 ```
-<
-repository
->
-<
-！ - 可能是其他存储库元素...  - 
->
-<
-repository
->
-<
-id
->
- spring-snapshot 
-<
-/ id
->
-<
-name
->
- Spring Snapshot Repository 
-<
-/ name
->
-<
-url
->
- http：// repo.spring.io/snapshot 
-<
-/ url
->
-<
-/ repository
->
-<
-/ repositories
->
+<repositories>
+<!-- ... possibly other repository elements ... -->
+<repository>
+<id>spring-snapshot</id>
+<name>Spring Snapshot Repository</name>
+<url>http://repo.spring.io/snapshot</url>
+</repository>
+</repositories>
 ```
-
-
 
 如果您使用里程碑或版本候选版本，则需要确保Spring Milestone存储库的定义如下所示：
 
-**pom.xml中。 **
+**pom.xml中。 **
 
 ```
-<
-repository
->
-<
-！ - 可能是其他存储库元素...  - 
->
-<
-repository
->
-<
-id
->
- spring-milestone 
-<
-/ id
->
-<
-name
->
- Spring里程碑存储库
-<
-/ name
->
-<
-url
->
- http：// repo.spring.io/milestone 
-<
-/ url
->
-<
-/ repository
->
-<
-/ repositories
->
+<repositories>
+<!-- ... possibly other repository elements ... -->
+<repository>
+<id>spring-milestone</id>
+<name>Spring Milestone Repository</name>
+<url>http://repo.spring.io/milestone</url>
+</repository>
+</repositories>
 ```
-
-
 
 #### Spring框架Bom
 
@@ -250,65 +134,21 @@ Spring Security针对Spring Framework 5.0.0.RC3构建，但应该与4.0.x一起�
 
 一个（乏味）的方式来规避这个问题将是将所有的Spring框架模块包含在你的pom的[&lt;dependencyManagement&gt;](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Dependency_Management)部分。另一种方法是将`spring-framework-bom`您的`<dependencyManagement>`部分中`pom.xml`包含如下所示：
 
-**pom.xml中。 **
+**pom.xml中。 **
 
 ```
-<
-dependencyManager
->
-<
-dependencies
->
-<
-dependency
->
-<
-groupId
->
- org.springframework 
-<
-/ groupId
->
-<
-artifactId
->
- spring-framework-bom 
-<
-/ artifactId
->
-<
-version
->
- 5.0.0.RC3 
-<
-/ version
->
-<
-type
->
- pom 
-<
-/ type 
->
-<
-scope
->
- import 
-<
-/ scope
->
-<
-/ dependency
->
-<
-/ dependencies
->
-<
-/ dependencyManagement
->
+<dependencyManager> 
+	<dependencies> 
+	<dependency> 
+		<groupId> org.springframework </ groupId> 
+		<artifactId> spring-framework-bom </ artifactId> 
+		<version> 5.0.0.RC3 </ version> 
+		<type> pom </ type > 
+		<scope> import </ scope> 
+	</ dependency> 
+	</ dependencies> 
+</ dependencyManagement>
 ```
-
-
 
 这将确保Spring Security的所有传递依赖使用Spring 5.0.0.RC3模块。
 
@@ -316,25 +156,23 @@ scope
 | :--- |
 | 这种方法使用Maven的“物料清单”（BOM）概念，仅在Maven 2.0.9+中可用。有关如何解决依赖关系的更多详细信息，请参考[Maven的“依赖机制简介”文档](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)。 |
 
-### 2.4.2毕业
+### 2.4.2 Gradle
 
 一个最小的Spring Security Gradle依赖关系通常如下所示：
 
-**的build.gradle。 **
+**的build.gradle。 **
 
 ```
 依赖{
 
-	编译
+    编译
 'org.springframework.security:spring-security-web:5.0.0.M3'
- 
-	编译
+
+    编译
 'org.springframework.security:spring-security-config:5.0.0.M3'
- 
+
 }
 ```
-
-
 
 如果您正在使用其他功能（如LDAP，OpenID等），则还需要包含相应的[第2.4.3节“项目模块”](https://docs.spring.io/spring-security/site/docs/5.0.0.M3/reference/htmlsingle/#modules)。
 
@@ -342,77 +180,69 @@ scope
 
 所有GA版本（即以.RELEASE结尾的版本）都部署到Maven Central，因此使用mavenCentral（）存储库对于GA版本是足够的。
 
-**的build.gradle。 **
+**的build.gradle。 **
 
 ```
 存储库{
 
-	mavenCentral（）
+    mavenCentral（）
 
 }
 ```
 
-
-
 如果您使用SNAPSHOT版本，则需要确保Spring Snapshot存储库的定义如下所示：
 
-**的build.gradle。 **
+**的build.gradle。 **
 
 ```
 存储库{
 
-	maven {url'https 
+    maven {url'https 
 ://repo.spring.io/snapshot'
  }
 
 }
 ```
 
-
-
 如果您使用里程碑或版本候选版本，则需要确保Spring Milestone存储库的定义如下所示：
 
-**的build.gradle。 **
+**的build.gradle。 **
 
 ```
 存储库{
 
-	maven {url'https 
+    maven {url'https 
 ://repo.spring.io/milestone'
  }
 
 }
 ```
 
-
-
 #### 使用Spring 4.0.x和Gradle
 
 默认情况下，Gradle将在解析传递版本时使用最新版本。这意味着在使用Spring Framework 5.0.0.RC3运行Spring Security 5.0.0.M3时通常不需要额外的工作。然而，有时可能会出现问题，所以最好使用[Gradle的ResolutionStrategy](http://www.gradle.org/docs/current/dsl/org.gradle.api.artifacts.ResolutionStrategy.html)来减轻这个问题，如下所示：
 
-**的build.gradle。 **
+**的build.gradle。 **
 
 ```
 configured.all {
 
-	resolutionStrategy.eachDependency {DependencyResolveDetails details  - 
+    resolutionStrategy.eachDependency {DependencyResolveDetails details  - 
 >
 if
 （details.requested.group == 
 'org.springframework'
 ）{
 
-			details.useVersion'5.0.0.RC3 
+            details.useVersion'5.0.0.RC3 
 '
 
-		}
+        }
 
-	}
+    }
 
 }
 ```
-
-
 
 这将确保Spring Security的所有传递依赖使用Spring 5.0.0.RC3模块。
 
