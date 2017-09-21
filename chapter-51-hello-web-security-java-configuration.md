@@ -13,12 +13,12 @@ import org.springframework.security.config.annotation.web.configuration。*;
 @EnableWebSecurity
  public  class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Bean
-	 public UserDetailsS​​ervice userDetailsS​​ervice（） throws Exception {
-		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager（）;
-		manager.createUser（User.withUsername（“user”）. password（“password”）.roles（“USER”）.build（））;
-		退货经理
-	}
+    @Bean
+     public UserDetailsS​​ervice userDetailsS​​ervice（） throws Exception {
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager（）;
+        manager.createUser（User.withUsername（“user”）. password（“password”）.roles（“USER”）.build（））;
+        退货经理
+    }
 }
 ```
 
@@ -47,8 +47,41 @@ import org.springframework.security.config.annotation.web.configuration。*;
   * [HttpServletRequest的＃getRemoteUser（）](https://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServletRequest.html#getRemoteUser%28%29)
   * [HttpServletRequest.html＃getUserPrincipal（）](https://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServletRequest.html#getUserPrincipal%28%29)
   * [HttpServletRequest.html＃的isUserInRole（java.lang.String中）](https://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServletRequest.html#isUserInRole%28java.lang.String%29)
-  * [HttpServletRequest.html＃login（java.lang.String，java.lang.String）](https://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServletRequest.html#login%28java.lang.String,%20java.lang.String%29)
+  * [HttpServletRequest.html＃login（java.lang.String，java.lang.String）](https://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServletRequest.html#login%28java.lang.String, java.lang.String%29)
   * [HttpServletRequest.html＃注销（）](https://docs.oracle.com/javaee/6/api/javax/servlet/http/HttpServletRequest.html#logout%28%29)
+
+### 5.1.1 AbstractSecurityWebApplicationInitializer
+
+下一步是注册`springSecurityFilterChain`战争。这可以在Servlet 3.0+环境中使用[Spring的WebApplicationInitializer支持的](http://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/html/mvc.html#mvc-container-config)Java配置中完成。不要惊讶，Spring Security提供了一个基础类`AbstractSecurityWebApplicationInitializer`，可以确保`springSecurityFilterChain`为您注册。我们使用的方式`AbstractSecurityWebApplicationInitializer`取决于我们是否已经在使用Spring，或者Spring Security是我们应用程序中唯一的Spring组件。
+
+* [第5.1.2节“AbstractSecurityWebApplicationInitializer without Existing Spring”](https://docs.spring.io/spring-security/site/docs/5.0.0.M3/reference/htmlsingle/#abstractsecuritywebapplicationinitializer-without-existing-spring)
+  - 如果您没有使用Spring，请使用这些说明
+* [第5.1.3节“AbstractSecurityWebApplicationInitializer with Spring MVC”](https://docs.spring.io/spring-security/site/docs/5.0.0.M3/reference/htmlsingle/#abstractsecuritywebapplicationinitializer-with-spring-mvc)
+  - 如果您已经在使用Spring，请使用这些说明
+
+### 5.1.2 AbstractSecurityWebApplicationInitializer没有现有的Spring
+
+如果您不使用Spring或Spring MVC，则需要将其`WebSecurityConfig`传入超类，以确保配置被拾取。你可以在下面找到一个例子：
+
+```
+import org.springframework.security.web.context.*;
+
+public class SecurityWebApplicationInitializer
+	extends AbstractSecurityWebApplicationInitializer {
+
+	public SecurityWebApplicationInitializer() {
+		super(WebSecurityConfig.class);
+	}
+}
+```
+
+该`SecurityWebApplicationInitializer`会做以下事情：
+
+* 为应用程序中的每个URL自动注册springSecurityFilterChain过滤器
+* 添加加载
+  [WebSecurityConfig](https://docs.spring.io/spring-security/site/docs/5.0.0.M3/reference/htmlsingle/#jc-hello-wsca)
+  的ContextLoaderListener
+  。
 
 
 
